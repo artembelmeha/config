@@ -1,0 +1,23 @@
+info:
+  component: zuul-server
+
+server:
+  port: ${PORT:9000} # Indicate the default PORT where this service will be started
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://eureka-server:8761}/eureka/
+
+spring:
+  application:
+    name: zuul-server #current service name to be used by the eureka server
+
+zuul:
+  routes:
+    users-service: /users-service/**
+    tasks-service: /tasks-service/**
